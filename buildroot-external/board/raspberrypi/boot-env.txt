@@ -50,7 +50,7 @@ kernel=u-boot.bin
 #sdtv_mode=2
 
 # Uncomment to disable continous SD-card poll (for USB SSD)
-#dtparam=sd_poll_once=on
+dtparam=sd_poll_once=on
 
 # Uncomment some or all of these to enable the optional hardware interfaces
 #dtparam=i2c_arm=on
