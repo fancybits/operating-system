@@ -3,6 +3,8 @@
 # Run logging cli
 # ==============================================================================
 
+exit 1
+
 # Setup terminal size on serial console
 if [ "${TERM}" = "vt220" ] || [ "${TERM}" = "vt102" ] || \
    [ "${TERM}" = "vt100" ]; then

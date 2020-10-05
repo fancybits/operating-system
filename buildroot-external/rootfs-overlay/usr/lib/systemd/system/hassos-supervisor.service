@@ -16,5 +16,5 @@ ExecStartPre=-/usr/bin/docker stop hassio_supervisor
 ExecStart=/usr/sbin/hassos-supervisor
 ExecStop=-/usr/bin/docker stop hassio_supervisor
 
-[Install]
-WantedBy=multi-user.target
+#[Install]
+#WantedBy=multi-user.target

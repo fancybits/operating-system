@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+exit 1
+
 PROFILES_DIR="/mnt/data/supervisor/apparmor"
 CACHE_DIR="${PROFILES_DIR}/cache"
 REMOVE_DIR="${PROFILES_DIR}/remove"

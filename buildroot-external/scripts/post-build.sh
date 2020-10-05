@@ -16,7 +16,7 @@ BOARD_DIR=${2}
 # HassOS tasks
 fix_rootfs
 install_tini_docker
-install_hassos_cli
+#install_hassos_cli
 
 # Write os-release
 # shellcheck disable=SC2153
