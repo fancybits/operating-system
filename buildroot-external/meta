@@ -1,7 +1,7 @@
 VERSION_MAJOR=5
 VERSION_BUILD=3
 
-HASSOS_NAME="HassOS"
-HASSOS_ID="hassos"
+HASSOS_NAME="ChannelsPlusInABox"
+HASSOS_ID="dvros"
 
 DEPLOYMENT="development"
