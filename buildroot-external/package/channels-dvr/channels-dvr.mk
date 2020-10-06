@@ -17,7 +17,7 @@ define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	dd if=/dev/zero of=$(BINARIES_DIR)/data.ext4 bs=4G count=1
 	mkfs.ext4 -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 $(BINARIES_DIR)/data.ext4
 	mkdir -p /mnt/data/
-	mount -o loop $(BINARIES_DIR)/data.ext4 /mnt/data
+	sudo mount -o loop $(BINARIES_DIR)/data.ext4 /mnt/data
 
 	cd /mnt/data
 	mkdir -p channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)
@@ -34,8 +34,8 @@ define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	cd ..
 	chown -R 501:501 channels-dvr
 
-	if ! umount /mnt/data; then
-		umount -f /mnt/data || echo "umount force fails!"
+	if ! sudo umount /mnt/data; then
+		sudo umount -f /mnt/data || echo "umount force fails!"
 	fi
 endef
 
