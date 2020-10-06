@@ -1,6 +1,8 @@
 disable hassos-supervisor.service
 disable hassos-apparmor.service
 
+disable avahi-daemon.service
+
 disable docker.service
 disable etc-docker.mount
 disable root-.docker.mount
