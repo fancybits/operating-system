@@ -131,7 +131,7 @@ function _create_disk_gpt() {
 
     ##
     # Write new image & GPT
-    dd if=/dev/zero of="${hdd_img}" bs=4G count="${hdd_count}"
+    dd if=/dev/zero of="${hdd_img}" bs=1G count="${hdd_count}"
     sgdisk -o "${hdd_img}"
 
     ##
