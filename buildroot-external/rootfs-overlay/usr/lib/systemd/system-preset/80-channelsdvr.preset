@@ -1,4 +1,5 @@
 disable avahi-daemon.service
+disable avahi-dnsconfd.service
 disable docker.service
 disable etc-docker.mount
 disable root-.docker.mount
