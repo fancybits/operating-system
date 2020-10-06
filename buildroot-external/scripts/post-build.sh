@@ -41,8 +41,10 @@ install_tini_docker
 ) > "${TARGET_DIR}/etc/machine-info"
 
 # Channels
-rm -f "${TARGET_DIR}/usr/sbin/hassos-{cli,supervisor}"
-rm -f "${TARGET_DIR}/usr/lib/systemd/system/hassos-{supervisor,apparmor}.service"
+rm -f "${TARGET_DIR}"/usr/sbin/hassos-{cli,supervisor}
+rm -f "${TARGET_DIR}"/usr/lib/systemd/system/hassos-{supervisor,apparmor}.service
+rm -f "${TARGET_DIR}"/etc/systemd/system/*getty*service.d/hassos.conf
+rm -f "${TARGET_DIR}"/etc/systemd/system/dropbear.service.d/docker.conf
 
 # Setup RAUC
 write_rauc_config
