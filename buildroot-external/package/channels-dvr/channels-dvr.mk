@@ -5,9 +5,10 @@
 ################################################################################
 
 CHANNELS_DVR_VERSION = 1.0.0
+CHANNELS_DVR_SITE = $(BR2_EXTERNAL_HASSOS_PATH)/package/channels-dvr
+CHANNELS_DVR_SITE_METHOD = local
 
 define CHANNELS_DVR_BUILD_CMDS
-	
 endef
 
 define CHANNELS_DVR_INSTALL_TARGET_CMDS
