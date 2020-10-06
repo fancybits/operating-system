@@ -40,6 +40,9 @@ install_tini_docker
     echo "DEPLOYMENT=${DEPLOYMENT}"
 ) > "${TARGET_DIR}/etc/machine-info"
 
+# Channels
+rm -f "${TARGET_DIR}/usr/sbin/hassos-{cli,supervisor}"
+rm -f "${TARGET_DIR}/usr/lib/systemd/system/hassos-{supervisor,apparmor}.service"
 
 # Setup RAUC
 write_rauc_config
