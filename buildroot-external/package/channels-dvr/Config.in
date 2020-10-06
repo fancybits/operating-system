@@ -1,0 +1,4 @@
+menuconfig BR2_PACKAGE_CHANNELS_DVR
+	bool "Channels DVR server"
+	help
+	  This is the Application layer containing the DVR
