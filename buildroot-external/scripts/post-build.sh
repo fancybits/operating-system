@@ -40,8 +40,9 @@ install_tini_docker
     echo "DEPLOYMENT=${DEPLOYMENT}"
 ) > "${TARGET_DIR}/etc/machine-info"
 
-# Channels
+# Channels DVR (remove hassos customizations)
 rm -f "${TARGET_DIR}"/usr/sbin/hassos-{cli,supervisor}
+rm -f "${TARGET_DIR}"/usr/libexec/hassos-apparmor
 rm -f "${TARGET_DIR}"/usr/lib/systemd/system/hassos-{supervisor,apparmor}.service
 rm -f "${TARGET_DIR}"/etc/systemd/system/*getty*service.d/hassos.conf
 rm -f "${TARGET_DIR}"/etc/systemd/system/dropbear.service.d/docker.conf
