@@ -9,5 +9,5 @@ Type=oneshot
 RemainAfterExit=true
 ExecStart=/usr/libexec/hassos-apparmor
 
-#[Install]
-#WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
