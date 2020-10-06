@@ -5,6 +5,8 @@
 # ==============================================================================
 set -e
 
+exit 0
+
 DEVICE_CHILD="$(findfs LABEL="hassos-data")"
 DEVICE_ROOT="/dev/$(lsblk -no pkname "${DEVICE_CHILD}")"
 PART_NUM="${DEVICE_CHILD: -1}"

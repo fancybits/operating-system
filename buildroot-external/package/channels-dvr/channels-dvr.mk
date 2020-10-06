@@ -11,6 +11,10 @@ CHANNELS_DVR_SITE_METHOD = local
 define CHANNELS_DVR_BUILD_CMDS
 endef
 
+define CHANNELS_DVR_USERS
+	channels 501 channels 501 * /mnt/data/channels-dvr/data - video Channels
+endef
+
 define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	dd if=/dev/zero of=$(BINARIES_DIR)/data.ext4 bs=4G count=1
 	mkfs.ext4 -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 $(BINARIES_DIR)/data.ext4
