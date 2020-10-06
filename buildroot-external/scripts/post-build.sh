@@ -46,6 +46,7 @@ rm -f "${TARGET_DIR}"/usr/libexec/hassos-apparmor
 rm -f "${TARGET_DIR}"/usr/lib/systemd/system/hassos-{supervisor,apparmor}.service
 rm -f "${TARGET_DIR}"/etc/systemd/system/*getty*service.d/hassos.conf
 rm -f "${TARGET_DIR}"/etc/systemd/system/dropbear.service.d/docker.conf
+sed -i "s|\(root:.*\)/bin/sh|\1/bin/bash|" "${TARGET_DIR}/etc/passwd"
 
 # Setup RAUC
 write_rauc_config
