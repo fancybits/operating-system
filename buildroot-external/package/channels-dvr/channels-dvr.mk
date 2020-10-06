@@ -31,7 +31,7 @@ define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	sudo chown -R 501:501 /mnt/data/channels-dvr
 
 	if ! sudo umount /mnt/data; then \
-		sudo umount -f /mnt/data || echo "umount force fails!" \
+		sudo umount -f /mnt/data || echo "umount force fails!"; \
 	fi
 endef
 
