@@ -1,0 +1,19 @@
+[Unit]
+Description=Channels DVR
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=/mnt/data
+
+[Service]
+Type=simple
+User=channels
+Group=channels
+WorkingDirectory=/mnt/data/channels-dvr/data
+ExecStart=/bin/sh -c 'exec /mnt/data/channels-dvr/latest/channels-dvr >> $base_path/data/channels-dvr.log 2>&1'
+Restart=always
+RestartSec=30
+LimitNOFILE=8192
+OOMScoreAdjust=-500
+
+[Install]
+WantedBy=multi-user.target
