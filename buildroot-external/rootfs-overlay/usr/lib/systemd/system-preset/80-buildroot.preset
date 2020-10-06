@@ -1,2 +1,3 @@
 disable hassos-supervisor.service
 disable hassos-apparmor.service
+disable docker.service
