@@ -20,20 +20,15 @@ define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	mkdir -p /mnt/data/
 	sudo mount -o loop $(BINARIES_DIR)/data.ext4 /mnt/data
 
-	cd /mnt/data
-	mkdir -p channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)
-	cd channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)
-	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffmpeg-linux-arm64" -o ffmpeg
-	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffprobe-linux-arm64" -o ffprobe
-	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/comskip-linux-arm64" -o comskip
-	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/channels-dvr-linux-arm64" -o channels-dvr
-	chmod +x *
-	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/linux-arm64.sha256" -o linux-arm64.sha256
-	cd ../
-	ln -nsf $(CHANNELS_DVR_BUILD_VERSION) latest
-	mkdir -p data
-	cd ..
-	chown -R 501:501 channels-dvr
+	mkdir -p /mnt/data/channels-dvr/{data,$(CHANNELS_DVR_BUILD_VERSION)}
+	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffmpeg-linux-arm64" -o /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)/ffmpeg
+	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffprobe-linux-arm64" -o /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)/ffprobe
+	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/comskip-linux-arm64" -o /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)/comskip
+	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/channels-dvr-linux-arm64" -o /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)/channels-dvr
+	chmod +x /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)/*
+	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/linux-arm64.sha256" -o /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)/linux-arm64.sha256
+	ln -nsf /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION) /mnt/data/channels-dvr/latest
+	chown -R 501:501 /mnt/data/channels-dvr
 
 	if ! sudo umount /mnt/data; then
 		sudo umount -f /mnt/data || echo "umount force fails!"
