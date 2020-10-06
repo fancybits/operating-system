@@ -18,7 +18,7 @@ define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	dd if=/dev/zero of=$(BINARIES_DIR)/data.ext4 bs=4G count=1
 	mkfs.ext4 -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 $(BINARIES_DIR)/data.ext4
 	mkdir -p /mnt/data/
-	sudo mount -o loop $(BINARIES_DIR)/data.ext4 /mnt/data
+	sudo mount -o loop,umask=0022,gid=$(id -g),uid=$(id -u) $(BINARIES_DIR)/data.ext4 /mnt/data
 
 	mkdir -p /mnt/data/channels-dvr/{data,$(CHANNELS_DVR_BUILD_VERSION)}
 	curl "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffmpeg-linux-arm64" -o /mnt/data/channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)/ffmpeg
