@@ -22,12 +22,12 @@ define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	cd /mnt/data
 	mkdir -p channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)
 	cd channels-dvr/$(CHANNELS_DVR_BUILD_VERSION)
-	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffmpeg-linux-arm64" ffmpeg
-	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffprobe-linux-arm64" ffprobe
-	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/comskip-linux-arm64" comskip
-	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/channels-dvr-linux-arm64" channels-dvr
+	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffmpeg-linux-arm64" -o ffmpeg
+	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/ffprobe-linux-arm64" -o ffprobe
+	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/comskip-linux-arm64" -o comskip
+	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/channels-dvr-linux-arm64" -o channels-dvr
 	chmod +x *
-	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/linux-arm64.sha256" linux-arm64.sha256
+	curl -f -s "https://channels-dvr.s3.amazonaws.com/$(CHANNELS_DVR_BUILD_VERSION)/linux-arm64.sha256" -o linux-arm64.sha256
 	cd ../
 	ln -nsf $(CHANNELS_DVR_BUILD_VERSION) latest
 	mkdir -p data
