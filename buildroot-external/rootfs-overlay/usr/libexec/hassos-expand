@@ -5,7 +5,7 @@
 # ==============================================================================
 set -e
 
-DEVICE_CHILD="$(findfs UUID="78eeef04-2a71-490b-aeba-0ab817a8b399")"
+DEVICE_CHILD="$(findfs PARTUUID="78eeef04-2a71-490b-aeba-0ab817a8b399")"
 DEVICE_ROOT="/dev/$(lsblk -no pkname "${DEVICE_CHILD}")"
 PART_NUM="${DEVICE_CHILD: -1}"
 
@@ -35,5 +35,5 @@ partx -u "${DEVICE_ROOT}"
 
 # Resize filesystem
 echo "[INFO] Recreate DVR filesystem"
-mkfs.exfat -s 131072 -n DVR "${DEVICE_CHILD}"
+mkfs.exfat -n DVR "${DEVICE_CHILD}"
 echo "[INFO] Finish DVR resizing"
