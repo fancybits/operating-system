@@ -40,6 +40,10 @@ do_mount()
         ${log} "Skipping system partition on ${DEVICE}"
         exit 0
     fi
+    if echo "$LABEL" | grep -q "^CONFIG$"; then
+        ${log} "Skipping CONFIG partition on ${DEVICE}"
+        exit 0
+    fi
 
     if grep -q " /media/${LABEL} " /etc/mtab; then
         # Already in use, make a unique one
