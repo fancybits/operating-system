@@ -1,0 +1,14 @@
+[Unit]
+Description=Media partition
+DefaultDependencies=no
+Before=umount.target local-fs.target
+Conflicts=umount.target
+
+[Mount]
+What=tmpfs
+Where=/media
+Type=tmpfs
+Options=rw,nosuid,nodev,mode=755
+
+[Install]
+WantedBy=local-fs.target

@@ -26,12 +26,10 @@ install_tini_docker
     echo "ID=${HASSOS_ID}"
     echo "VERSION_ID=${VERSION_MAJOR}.${VERSION_BUILD}"
     echo "PRETTY_NAME=\"${HASSOS_NAME} ${VERSION_MAJOR}.${VERSION_BUILD}\""
-    echo "CPE_NAME=cpe:2.3:o:channels_plus:${HASSOS_ID}:${VERSION_MAJOR}.${VERSION_BUILD}:*:${DEPLOYMENT}:*:*:*:${BOARD_ID}:*"
+    echo "CPE_NAME=cpe:2.3:o:getchannels.com:${HASSOS_ID}:${VERSION_MAJOR}.${VERSION_BUILD}:*:${DEPLOYMENT}:*:*:*:${BOARD_ID}:*"
     echo "HOME_URL=https://getchannels.com/"
     echo "VARIANT=\"${HASSOS_NAME} ${BOARD_NAME}\""
     echo "VARIANT_ID=${BOARD_ID}"
-    echo "SUPERVISOR_MACHINE=${SUPERVISOR_MACHINE}"
-    echo "SUPERVISOR_ARCH=${SUPERVISOR_ARCH}"
 ) > "${TARGET_DIR}/usr/lib/os-release"
 
 # Write machine-info
@@ -47,6 +45,8 @@ rm -f "${TARGET_DIR}"/usr/lib/systemd/system/hassos-{supervisor,apparmor}.servic
 rm -f "${TARGET_DIR}"/etc/systemd/system/*getty*service.d/hassos.conf
 rm -f "${TARGET_DIR}"/etc/systemd/system/dropbear.service.d/docker.conf
 sed -i "s|\(root:.*\)/bin/sh|\1/bin/bash|" "${TARGET_DIR}/etc/passwd"
+mkdir -p "${TARGET_DIR}/media"
+touch "${TARGET_DIR}/etc/dvros"
 
 # Setup RAUC
 write_rauc_config

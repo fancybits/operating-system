@@ -2,14 +2,14 @@
 Description=Channels DVR
 Wants=network-online.target
 After=network-online.target
-RequiresMountsFor=/mnt/data
+RequiresMountsFor=/mnt/data /media
 
 [Service]
 Type=simple
 User=channels
 Group=channels
 WorkingDirectory=/mnt/data/channels-dvr/data
-ExecStart=/bin/sh -c 'exec /mnt/data/channels-dvr/latest/channels-dvr >> /mnt/data/channels-dvr/data/channels-dvr.log 2>&1'
+ExecStart=/bin/sh -c 'export CHANNELS_DVR_DEFAULT_PATH=/media/DVR; exec /mnt/data/channels-dvr/latest/channels-dvr >> /mnt/data/channels-dvr/data/channels-dvr.log 2>&1'
 Restart=always
 RestartSec=30
 LimitNOFILE=8192
