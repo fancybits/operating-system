@@ -4,3 +4,5 @@ disable docker.service
 disable etc-docker.mount
 disable root-.docker.mount
 disable var-lib-docker.mount
+disable bluetooth.service
+disable bluetooth-bcm43xx.service
