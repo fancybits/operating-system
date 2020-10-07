@@ -9,6 +9,7 @@ KERNEL0_UUID="26700fc6-b0bc-4ccf-9837-ea1a4cba3e65"
 KERNEL1_UUID="fc02a4f0-5350-406f-93a2-56cbed636b5f"
 OVERLAY_UUID="f1326040-5236-40eb-b683-aaa100a9afcf"
 DATA_UUID="a52a4597-fa3a-4851-aefd-2fbe9f849079"
+DVR_UUID="78eeef04-2a71-490b-aeba-0ab817a8b399"
 
 BOOT_SIZE=(32M 24M)
 BOOTSTATE_SIZE=8M
@@ -16,6 +17,7 @@ SYSTEM_SIZE=256M
 KERNEL_SIZE=24M
 OVERLAY_SIZE=96M
 DATA_SIZE=4G
+DVR_SIZE=512MB
 
 
 function size2sectors() {
@@ -170,6 +172,10 @@ function _create_disk_gpt() {
     # Data
     data_offset="$(sgdisk -F "${hdd_img}")"
     sgdisk -n "0:0:+${DATA_SIZE}" -c 0:"hassos-data" -t 0:"0FC63DAF-8483-4772-8E79-3D69D8477DE4" -u "0:${DATA_UUID}" "${hdd_img}"
+
+    # DVR
+    dvr_offset="$(sgdisk -F "${hdd_img}")"
+    sgdisk -n "0:0:+${DVR_SIZE}" -c 0:"DVR" -t 0:"EBD0A0A2-B9E5-4433-87C0-68B6B72699C7" -u "0:${DVR_UUID}" "${hdd_img}"
 
     ##
     # Write Images
