@@ -35,5 +35,5 @@ partx -u "${DEVICE_ROOT}"
 
 # Resize filesystem
 echo "[INFO] Recreate DVR filesystem"
-mkfs.exfat -n DVR "${DEVICE_CHILD}"
+mkfs.exfat "${DEVICE_CHILD}"
 echo "[INFO] Finish DVR resizing"
