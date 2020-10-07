@@ -24,7 +24,7 @@ do_mount()
 {
     if [ -n "${MOUNT_POINT}" ]; then
         ${log} "Warning: ${DEVICE} is already mounted at ${MOUNT_POINT}"
-        exit 1
+        exit 0
     fi
 
     # Get info for this drive: $ID_FS_LABEL and $ID_FS_TYPE
@@ -34,7 +34,7 @@ do_mount()
     LABEL=${ID_FS_LABEL}
     if [ -z "$LABEL" ]; then
         ${log} "Warning: ${DEVICE} has no label"
-        exit 1
+        exit 0
     fi
     if echo "$LABEL" | grep -q "^hassos-"; then
         ${log} "Skipping system partition on ${DEVICE}"
