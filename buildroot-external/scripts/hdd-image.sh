@@ -323,5 +323,5 @@ function convert_disk_image_gz() {
     local hdd_img="$(hassos_image_name "${hdd_ext}")"
 
     rm -f "${hdd_img}.gz"
-    gzip --best "${hdd_img}"
+    pigz --best "${hdd_img}"
 }
