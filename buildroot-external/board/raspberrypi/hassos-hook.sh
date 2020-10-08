@@ -12,7 +12,7 @@ function hassos_pre_image() {
     cp "${BOARD_DIR}/../boot-env.txt" "${BOOT_DATA}/config.txt"
 
     # Firmware
-    if [[ "${BOARD_ID}" =~ "pi4" ]]; then
+    if [[ "${BOARD_ID}" =~ "rpi4" || "${BOARD_ID}" == "PI4" ]]; then
         cp "${BINARIES_DIR}/rpi-firmware/fixup.dat" "${BOOT_DATA}/fixup4.dat" 
         cp "${BINARIES_DIR}/rpi-firmware/start.elf" "${BOOT_DATA}/start4.elf" 
     else
@@ -26,7 +26,7 @@ function hassos_pre_image() {
     echo "dwc_otg.lpm_enable=0 console=tty1" > "${BOOT_DATA}/cmdline.txt"
 
     # Enable 64bit support
-    if [[ "${BOARD_ID}" =~ "64" || "${BOARD_ID}" == "pi4" ]]; then
+    if [[ "${BOARD_ID}" =~ "64" || "${BOARD_ID}" == "PI4" ]]; then
         sed -i "s|#arm_64bit|arm_64bit|g" "${BOOT_DATA}/config.txt"
     fi
 }
