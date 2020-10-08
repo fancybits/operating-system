@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function hassos_image_name() {
-    local filenamever = $(hassos_version | sed -e 's,\.,,g')
+    local filenamever="$(hassos_version | sed -e 's,\.,,g')"
     echo "${BINARIES_DIR}/${HASSOS_ID}_${BOARD_ID}_${filenamever}.${1}"
 }
 
