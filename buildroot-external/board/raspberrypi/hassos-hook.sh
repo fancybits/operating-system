@@ -12,7 +12,7 @@ function hassos_pre_image() {
     cp "${BOARD_DIR}/../boot-env.txt" "${BOOT_DATA}/config.txt"
 
     # Firmware
-    if [[ "${BOARD_ID}" =~ "rpi4" ]]; then
+    if [[ "${BOARD_ID}" =~ "pi4" ]]; then
         cp "${BINARIES_DIR}/rpi-firmware/fixup.dat" "${BOOT_DATA}/fixup4.dat" 
         cp "${BINARIES_DIR}/rpi-firmware/start.elf" "${BOOT_DATA}/start4.elf" 
     else
