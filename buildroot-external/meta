@@ -1,7 +1,7 @@
 VERSION_MAJOR=2020
 VERSION_BUILD=10.8.128
 
-HASSOS_NAME="Channels Operating System"
-HASSOS_ID="dvros"
+HASSOS_NAME="Channels DVR Server Distro"
+HASSOS_ID="ChannelsDVRServer"
 
 DEPLOYMENT="release"
