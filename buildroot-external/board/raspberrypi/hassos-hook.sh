@@ -26,7 +26,7 @@ function hassos_pre_image() {
     echo "dwc_otg.lpm_enable=0 console=tty1" > "${BOOT_DATA}/cmdline.txt"
 
     # Enable 64bit support
-    if [[ "${BOARD_ID}" =~ "64" ]]; then
+    if [[ "${BOARD_ID}" =~ "64" || "${BOARD_ID}" == "pi4" ]]; then
         sed -i "s|#arm_64bit|arm_64bit|g" "${BOOT_DATA}/config.txt"
     fi
 }
