@@ -9,7 +9,8 @@ Type=simple
 User=channels
 Group=channels
 WorkingDirectory=/mnt/data/channels-dvr/data
-ExecStart=/bin/sh -c 'export CHANNELS_DVR_DEFAULT_PATH=/media/DVR; exec /mnt/data/channels-dvr/latest/channels-dvr >> /mnt/data/channels-dvr/data/channels-dvr.log 2>&1'
+Environment=CHANNELS_DVR_DEFAULT_PATH=/media/DVR
+ExecStart=/mnt/data/channels-dvr/latest/channels-dvr -dir /mnt/data/channels-dvr/data/
 Restart=always
 RestartSec=30
 LimitNOFILE=8192
