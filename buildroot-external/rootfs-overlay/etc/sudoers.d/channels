@@ -1,0 +1,1 @@
+channels ALL=(ALL) NOPASSWD: /bin/systemctl reboot
