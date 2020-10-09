@@ -42,6 +42,7 @@ do_mount()
     fi
     if echo "$LABEL" | grep -q "^CONFIG$"; then
         ${log} "Skipping CONFIG partition on ${DEVICE}"
+        systemctl start hassos-config.service
         exit 0
     fi
 
