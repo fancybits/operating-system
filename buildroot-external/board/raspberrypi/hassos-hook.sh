@@ -23,7 +23,7 @@ function hassos_pre_image() {
     fi
 
     # Set cmd options
-    echo "dwc_otg.lpm_enable=0 console=tty1 usb-storage.quirks=174c:55aa:u,2109:0715:u,152d:0578:u,152d:1561:u,174c:0829:u" > "${BOOT_DATA}/cmdline.txt"
+    echo "dwc_otg.lpm_enable=0 console=tty1 usb-storage.quirks=174c:55aa:u,2109:0715:u,152d:1576:u,152d:0578:u,152d:1561:u,174c:0829:u" > "${BOOT_DATA}/cmdline.txt"
 
     # Enable 64bit support
     if [[ "${BOARD_ID}" =~ "64" || "${BOARD_ID}" == "PI4" ]]; then
