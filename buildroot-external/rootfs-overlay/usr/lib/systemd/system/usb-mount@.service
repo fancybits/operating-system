@@ -1,6 +1,6 @@
 [Unit]
 Description=Mount USB Drive on %i
-Requires=media.mount mnt-overlay.mount hassos-expand.service
+Requires=media.mount mnt-overlay.mount
 After=media.mount mnt-overlay.mount hassos-expand.service
 
 [Service]
