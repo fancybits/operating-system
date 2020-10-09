@@ -1,0 +1,13 @@
+[Unit]
+Description=Bash persistent user
+Requires=mnt-overlay.mount
+After=mnt-overlay.mount
+
+[Mount]
+What=/mnt/overlay/root/.bash_history
+Where=/root/.bash_history
+Type=None
+Options=bind
+
+[Install]
+WantedBy=hassos-bind.target
