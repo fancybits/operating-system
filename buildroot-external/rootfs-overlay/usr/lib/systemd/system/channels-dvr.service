@@ -1,8 +1,7 @@
 [Unit]
 Description=Channels DVR
-Wants=network-online.target time-sync.target
-After=network-online.target time-sync.target
-RequiresMountsFor=/mnt/data /media
+Requires=network-online.target time-sync.target media.mount mnt-data.mount
+After=network-online.target time-sync.target media.mount mnt-data.mount
 
 [Service]
 Type=simple
