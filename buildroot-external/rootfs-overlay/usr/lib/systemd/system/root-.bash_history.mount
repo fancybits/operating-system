@@ -1,7 +1,7 @@
 [Unit]
 Description=Bash persistent user
 Requires=mnt-overlay.mount
-After=mnt-overlay.mount
+After=mnt-overlay.mount hassos-overlay.service
 
 [Mount]
 What=/mnt/overlay/root/.bash_history
