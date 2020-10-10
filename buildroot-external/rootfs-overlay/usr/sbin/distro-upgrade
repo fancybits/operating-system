@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <version>"
+  exit 1
+fi
+
+version=$1
+mkdir -p /mnt/data/updates
+cd /mnt/data/updates
+rm -f ChannelsDVRServer_PI4.raucb
+wget https://channels-distro.s3.amazonaws.com/$version/ChannelsDVRServer_PI4.raucb
+rauc install ChannelsDVRServer_PI4.raucb
+
+echo
+echo 'Update installed!'
+echo 'Please reboot using `systemctl reboot`'
