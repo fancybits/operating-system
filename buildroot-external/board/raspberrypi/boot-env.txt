@@ -65,6 +65,9 @@ dtparam=sd_poll_once=on
 # Enable audio (loads snd_bcm2835)
 dtparam=audio=on
 
+# GPU memory
+gpu_mem=128
+
 [all]
 #dtoverlay=vc4-fkms-v3d
 #max_framebuffers=2
