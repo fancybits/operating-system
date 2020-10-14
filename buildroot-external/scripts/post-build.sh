@@ -21,7 +21,7 @@ install_tini_docker
 # Write os-release
 # shellcheck disable=SC2153
 (
-    echo "NAME=${HASSOS_NAME}"
+    echo "NAME=\"${HASSOS_NAME}\""
     echo "VERSION=\"${VERSION_MAJOR}.${VERSION_BUILD} (${BOARD_NAME})\""
     echo "ID=${HASSOS_ID}"
     echo "VERSION_ID=${VERSION_MAJOR}.${VERSION_BUILD}"
