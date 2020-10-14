@@ -35,7 +35,7 @@ index ec0b3bb64de8..2c6aa1933600 100644
  	};
  };
  
-+&pcie_0 {
++&pcie0 {
 +	pci@1,0 {
 +		#address-cells = <3>;
 +		#size-cells = <2>;
