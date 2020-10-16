@@ -16,7 +16,7 @@ define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	sudo umount /mnt/data || true
 	dd if=/dev/zero of=$(BINARIES_DIR)/data.ext4 bs=1M count=8k
 	mkfs.ext4 -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 $(BINARIES_DIR)/data.ext4
-	mkdir -p /mnt/data/
+	sudo mkdir -p /mnt/data/
 	sudo mount -o loop $(BINARIES_DIR)/data.ext4 /mnt/data
 
 	sudo mkdir -p /mnt/data/channels-dvr/{data,$(CHANNELS_DVR_VERSION)}
