@@ -6,3 +6,7 @@ disable root-.docker.mount
 disable var-lib-docker.mount
 disable bluetooth.service
 disable bluetooth-bcm43xx.service
+disable nmb.service
+disable smb.service
+disable samba.service
+disable winbind.service
