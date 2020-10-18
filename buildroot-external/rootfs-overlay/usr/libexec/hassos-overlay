@@ -26,3 +26,9 @@ if [ ! -f /mnt/overlay/etc/systemd/timesyncd.conf ]; then
     mkdir -p /mnt/overlay/etc/systemd
     cp -fp /etc/systemd/timesyncd.conf /mnt/overlay/etc/systemd/timesyncd.conf
 fi
+
+# Samba
+if [ ! -d /mnt/overlay/var/lib/samba ]; then
+    mkdir -p /mnt/overlay/var/lib/
+    cp -af /var/lib/samba /mnt/overlay/var/lib/
+fi
