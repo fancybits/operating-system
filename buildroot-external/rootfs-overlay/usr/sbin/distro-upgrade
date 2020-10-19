@@ -14,5 +14,5 @@ wget https://channels-distro.s3.amazonaws.com/$version/ChannelsDVRServer_PI4.rau
 rauc install ChannelsDVRServer_PI4.raucb
 
 echo
-echo 'Update installed!'
+echo "Update v$version installed!"
 echo 'Please reboot using `systemctl reboot`'
