@@ -32,3 +32,8 @@ if [ ! -d /mnt/overlay/var/lib/samba ]; then
     mkdir -p /mnt/overlay/var/lib/
     cp -af /var/lib/samba /mnt/overlay/var/lib/
 fi
+
+# systemd
+if [ ! -d /mnt/overlay/etc/systemd/system.control ]; then
+    mkdir -p /mnt/overlay/etc/systemd/system.control
+fi
