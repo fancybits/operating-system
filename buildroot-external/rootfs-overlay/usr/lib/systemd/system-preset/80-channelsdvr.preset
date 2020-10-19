@@ -8,3 +8,6 @@ disable bluetooth.service
 disable bluetooth-bcm43xx.service
 disable samba.service
 disable winbind.service
+disable nfs-mountd.service
+disable nfs-server.service
+disable proc-fs-nfsd.mount
