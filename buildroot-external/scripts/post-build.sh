@@ -47,6 +47,7 @@ rm -f "${TARGET_DIR}"/usr/lib/systemd/system/hassos-{supervisor,apparmor,data}.s
 rm -f "${TARGET_DIR}"/etc/systemd/system/*getty*service.d/hassos.conf
 rm -f "${TARGET_DIR}"/etc/systemd/system/dropbear.service.d/docker.conf
 sed -i "s|\(root:.*\)/bin/sh|\1/bin/bash|" "${TARGET_DIR}/etc/passwd"
+mkdir -p "${TARGET_DIR}/media"
 touch "${TARGET_DIR}/etc/channelsdistro"
 
 # Setup RAUC
