@@ -1,0 +1,14 @@
+[Unit]
+Description=Shares partition
+DefaultDependencies=no
+Before=umount.target local-fs.target
+Conflicts=umount.target
+
+[Mount]
+What=tmpfs
+Where=/shares
+Type=tmpfs
+Options=rw,nosuid,nodev,mode=755
+
+[Install]
+WantedBy=local-fs.target
