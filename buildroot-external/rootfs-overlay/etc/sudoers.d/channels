@@ -1,4 +1,3 @@
 channels ALL=(ALL) NOPASSWD: /bin/systemctl reboot
 channels ALL=(ALL) NOPASSWD: /bin/vcgencmd version, /bin/vcgencmd bootloader_version, /bin/vcgencmd measure_temp, /bin/vcgencmd get_mem, /bin/vcgencmd bootloader_config
-channels ALL=(ALL) NOPASSWD: /sbin/distro-version
-channels ALL=(ALL) NOPASSWD: /sbin/distro-samba
+channels ALL=(ALL) NOPASSWD: /sbin/distro-version, /sbin/distro-samba, /sbin/distro-shares
