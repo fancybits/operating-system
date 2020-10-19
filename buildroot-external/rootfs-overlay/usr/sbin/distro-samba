@@ -1,0 +1,15 @@
+#/bin/sh
+set -e
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <enable|disable>"
+  exit 1
+fi
+
+if [ "$1" = "enable" ]; then
+  touch /var/lib/samba/enabled
+  systemctl start smb nmb
+else
+  rm -f /var/lib/samba/enabled
+  systemctl stop smb nmb
+fi
