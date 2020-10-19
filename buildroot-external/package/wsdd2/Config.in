@@ -1,0 +1,6 @@
+config BR2_PACKAGE_WSDD2
+	bool "wsdd2"
+	help
+	  WSD/LLMNR Discovery/Name Service Daemon
+
+	  https://github.com/Andy2244/wsdd2
