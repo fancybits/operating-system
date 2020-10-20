@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount Shares
+Requires=shares.mount network.target
+After=shares.mount network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/distro-shares start
+
+[Install]
+WantedBy=multi-user.target
