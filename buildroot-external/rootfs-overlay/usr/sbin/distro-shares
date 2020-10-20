@@ -36,7 +36,7 @@ elif [ "$1" = "list" ]; then
     if [ -e "$f" ]; then
       base="$(basename "$f")"
       name="$(echo "$base" | sed -e 's/^shares-//g' -e 's/\.mount$//g')"
-      status=$(systemctl is-active "$base")
+      status=$(systemctl is-active "$base" || true)
       source="$(grep What= "$f" | cut -d= -f2)"
       echo -e "$name\t$status\t$source"
     fi
