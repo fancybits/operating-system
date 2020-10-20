@@ -51,7 +51,7 @@ elif [ "$1" = "start" ]; then
     for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
       if [ -e "$f" ]; then
         name="$(basename "$f")"
-        systemctl start "$name"
+        systemctl start "$name" || true
       fi
     done
   fi
