@@ -6,7 +6,7 @@ After=shares.mount network.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/sbin/distro-shares start
+ExecStart=/bin/sh /sbin/distro-shares start
 
 [Install]
 WantedBy=multi-user.target

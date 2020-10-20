@@ -34,8 +34,9 @@ EOF
 elif [ "$1" = "list" ]; then
   for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
     if [ -e "$f" ]; then
-      name="$(basename "$f")"
-      echo "$name" | sed -e 's/^shares-//g' -e 's/\.mount$//g'
+      name="$(basename "$f" | sed -e 's/^shares-//g' -e 's/\.mount$//g')"
+      source="$(grep What= "$f" | cut -d= -f2)"
+      echo "$name $source"
     fi
   done
 
