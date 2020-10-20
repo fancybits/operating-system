@@ -60,11 +60,13 @@ elif [ "$1" = "stop" ]; then
   if [ $# -eq 2 ]; then
     name="$2"
     systemctl stop "shares-$name.mount"
+    rm -f "/shares/$name"
   else
     for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
       if [ -e "$f" ]; then
         name="$(basename "$f")"
         systemctl stop "$name"
+        rm -f "/shares/$name"
       fi
     done
   fi
@@ -77,6 +79,7 @@ elif [ "$1" = "remove" ]; then
   systemctl stop "shares-$name.mount" || true
   rm -f "/mnt/overlay/etc/systemd/system.control/shares-$name.mount"
   systemctl daemon-reload
+  rm -f "/shares/$name"
 
 else
   usage
