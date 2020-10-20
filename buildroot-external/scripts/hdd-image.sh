@@ -98,7 +98,7 @@ function create_kernel_image() {
 }
 
 
-function _prepare_disk_image() {
+function prepare_disk_image() {
     create_boot_image
     create_overlay_image
     create_kernel_image
@@ -106,8 +106,6 @@ function _prepare_disk_image() {
 
 
 function create_disk_image() {
-    _prepare_disk_image
-
     if [ "${BOOT_SYS}" == "mbr" ]; then
         _create_disk_mbr
     else
