@@ -11,7 +11,7 @@ if [ "$1" = "add" ]; then
     usage
   fi
   name="$2"
-  opts="$3"
+  opts="rw,file_mode=0644,dir_mode=0755,uid=501,gid=501,iocharset=utf8,$3"
   path="$4"
   cat > "/mnt/overlay/etc/systemd/system.control/shares-$name.mount" <<EOF
 [Unit]
@@ -23,7 +23,7 @@ After=shares.mount network.target
 What=$path
 Where=/shares/$name
 Type=cifs
-Options=rw,file_mode=0644,dir_mode=0755,uid=501,gid=501,iocharset=utf8,$opts
+Options=$opts
 
 [Install]
 WantedBy=remote-fs.target
@@ -34,9 +34,11 @@ EOF
 elif [ "$1" = "list" ]; then
   for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
     if [ -e "$f" ]; then
-      name="$(basename "$f" | sed -e 's/^shares-//g' -e 's/\.mount$//g')"
+      base="$(basename "$f")"
+      name="$(echo "$base" | sed -e 's/^shares-//g' -e 's/\.mount$//g')"
+      status=$(systemctl is-active "$base")
       source="$(grep What= "$f" | cut -d= -f2)"
-      echo "$name $source"
+      echo -e "$name\t$status\t$source"
     fi
   done
 
