@@ -1,4 +1,4 @@
 channels ALL=(ALL) NOPASSWD: /bin/systemctl reboot, /sbin/shutdown
 channels ALL=(ALL) NOPASSWD: /bin/systemctl stop usb-mount@[[\:alpha\:][\:digit\:]]*
 channels ALL=(ALL) NOPASSWD: /bin/vcgencmd version, /bin/vcgencmd bootloader_version, /bin/vcgencmd measure_temp, /bin/vcgencmd get_mem, /bin/vcgencmd bootloader_config
-channels ALL=(ALL) NOPASSWD: /sbin/distro-version, /sbin/distro-samba, /sbin/distro-shares
+channels ALL=(ALL) NOPASSWD: /sbin/distro-version, /sbin/distro-samba, /sbin/distro-shares, /sbin/distro-hostname, /sbin/distro-timezone

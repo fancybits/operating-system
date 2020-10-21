@@ -1,0 +1,13 @@
+#/bin/sh
+set -e
+
+if [ $# -gt 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+  echo "Usage: $0 [<newhostname>]"
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  cat /etc/timezone
+else
+  echo "$1" > /etc/timezone
+fi
