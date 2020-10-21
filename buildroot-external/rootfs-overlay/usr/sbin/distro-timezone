@@ -2,12 +2,21 @@
 set -e
 
 if [ $# -gt 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
-  echo "Usage: $0 [<newhostname>]"
+  echo "Usage: $0 [<tz>]"
   exit 1
 fi
 
 if [ -z "$1" ]; then
   cat /etc/timezone
 else
-  echo "$1" > /etc/timezone
+  zone="$1"
+  if [ -e "/usr/share/zoneinfo/$zone" ]; then
+    echo "$zone" > /etc/timezone
+    umount /etc/localtime 2>/dev/null || true
+    ln -nsf "/usr/share/zoneinfo/$zone" /mnt/overlay/etc/localtime
+    mount -o bind /mnt/overlay/etc/localtime /etc/localtime
+  else
+    echo "Error: Unknown timezone $zone"
+    exit 1
+  fi
 fi
