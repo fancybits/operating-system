@@ -15,7 +15,7 @@ fi
 
 if [ ! -f /mnt/overlay/etc/hostname ]; then
     cp -fp /etc/hostname /mnt/overlay/etc/hostname
-elif [ "$(cat /mnt/overlay/etc/hostname)" = "server" ]
+elif [ "$(cat /mnt/overlay/etc/hostname)" = "server" ]; then
     echo -n "dvr-server" > /etc/hostname
 fi
 
