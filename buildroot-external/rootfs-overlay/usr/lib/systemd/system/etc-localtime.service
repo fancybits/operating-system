@@ -4,11 +4,11 @@ Requires=mnt-overlay.mount
 After=mnt-overlay.mount hassos-overlay.service
 Before=network.target
 
-[Mount]
-What=/mnt/overlay/etc/localtime
-Where=/etc/localtime
-Type=none
-Options=bind
+[Service]
+Type=oneshot
+ExecStart=mount -o bind /mnt/overlay/etc/localtime /etc/localtime
+ExecStop=-umount /etc/localtime
+RemainAfterExit=true
 
 [Install]
 WantedBy=hassos-bind.target
