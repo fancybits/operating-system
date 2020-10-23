@@ -14,7 +14,7 @@ define RPI_EEPROM_BUILD_CMDS
 	$(@D)/rpi-eeprom-config $(@D)/$(RPI_EEPROM_FIRMWARE_PATH) --out $(@D)/default.conf
 	(cat $(@D)/default.conf | grep -v ^$$; echo USB_MSD_PWR_OFF_TIME=1500) > $(@D)/boot.conf
 	$(@D)/rpi-eeprom-config $(@D)/$(RPI_EEPROM_FIRMWARE_PATH) --config $(@D)/boot.conf --out $(@D)/pieeprom.upd
-	sha256sum $(@D)/pieeprom.upd | awk '{ print $1 }' > $(@D)/pieeprom.sig
+	sha256sum $(@D)/pieeprom.upd | awk '{ print $$1 }' > $(@D)/pieeprom.sig
 endef
 
 define RPI_EEPROM_INSTALL_IMAGES_CMDS
