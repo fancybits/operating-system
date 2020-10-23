@@ -3,6 +3,8 @@ Description=HassOS data partition
 DefaultDependencies=no
 Before=umount.target local-fs.target
 Conflicts=umount.target
+After=systemd-fsck@dev-disk-by\x2dlabel-hassos\x2ddata.service
+Requires=systemd-fsck@dev-disk-by\x2dlabel-hassos\x2ddata.service
 
 [Mount]
 What=/dev/disk/by-label/hassos-data
