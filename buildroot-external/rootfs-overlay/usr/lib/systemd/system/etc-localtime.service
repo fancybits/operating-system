@@ -11,4 +11,4 @@ ExecStop=-umount /etc/localtime
 RemainAfterExit=true
 
 [Install]
-WantedBy=hassos-bind.target
+WantedBy=local-fs.target
