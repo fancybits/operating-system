@@ -9,7 +9,7 @@ CHANNELS_DVR_SITE = $(BR2_EXTERNAL_HASSOS_PATH)/package/channels-dvr
 CHANNELS_DVR_SITE_METHOD = local
 
 define CHANNELS_DVR_USERS
-	channels 501 channels 501 * /mnt/data/channels-dvr/data - video Channels
+	channels 501 channels 501 * /mnt/data/channels-dvr/data - video,systemd-journal Channels
 endef
 
 define CHANNELS_DVR_INSTALL_TARGET_CMDS
