@@ -1,0 +1,11 @@
+[Unit]
+Description=LED state: waiting for time sync
+Requires=network-online.target media.mount mnt-data.mount
+After=network-online.target media.mount mnt-data.mount
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "echo heartbeat > /sys/class/leds/led0/trigger; echo 1 > /sys/class/leds/led0/invert"
+
+[Install]
+WantedBy=multi-user.target
