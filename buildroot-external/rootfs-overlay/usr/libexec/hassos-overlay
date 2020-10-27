@@ -7,6 +7,8 @@ if [ ! -d /mnt/overlay/etc/NetworkManager/system-connections ]; then
     mkdir -p /mnt/overlay/etc/NetworkManager/system-connections
     cp -fp /etc/NetworkManager/system-connections/* /mnt/overlay/etc/NetworkManager/system-connections/
     chmod 600 /mnt/overlay/etc/NetworkManager/system-connections/*
+else
+    sed -i 's,id=HassOS default,id=wired,g' /mnt/overlay/etc/NetworkManager/system-connections/default
 fi
 
 if [ ! -f /mnt/overlay/root/.bash_history ]; then
