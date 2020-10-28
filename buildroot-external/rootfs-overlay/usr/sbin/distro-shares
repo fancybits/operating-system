@@ -1,0 +1,87 @@
+#/bin/sh
+set -e
+
+usage() {
+  echo "Usage: $0 <add|remove|list|start|stop> <sharename> [<options> <path>]"
+  exit 1
+}
+
+if [ "$1" = "add" ]; then
+  if [ $# -lt 4 ]; then
+    usage
+  fi
+  name="$2"
+  opts="rw,file_mode=0644,dir_mode=0755,uid=501,gid=501,iocharset=utf8,$3"
+  path="$4"
+  cat > "/mnt/overlay/etc/systemd/system.control/shares-$name.mount" <<EOF
+[Unit]
+Description=$name Share
+Requires=shares.mount network.target
+After=shares.mount network.target
+
+[Mount]
+What=$path
+Where=/shares/$name
+Type=cifs
+Options=$opts
+
+[Install]
+WantedBy=remote-fs.target
+EOF
+  systemctl daemon-reload
+  systemctl start "shares-$name.mount"
+
+elif [ "$1" = "list" ]; then
+  for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
+    if [ -e "$f" ]; then
+      base="$(basename "$f")"
+      name="$(echo "$base" | sed -e 's/^shares-//g' -e 's/\.mount$//g')"
+      status=$(systemctl is-active "$base" || true)
+      source="$(grep What= "$f" | cut -d= -f2)"
+      echo -e "$name\t$status\t$source"
+    fi
+  done
+
+elif [ "$1" = "start" ]; then
+  systemctl daemon-reload
+  if [ $# -eq 2 ]; then
+    name="$2"
+    systemctl start "shares-$name.mount"
+  else
+    for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
+      if [ -e "$f" ]; then
+        name="$(basename "$f")"
+        systemctl start "$name" || true
+      fi
+    done
+  fi
+
+elif [ "$1" = "stop" ]; then
+  if [ $# -eq 2 ]; then
+    name="$2"
+    systemctl stop "shares-$name.mount"
+    rm -f "/shares/$name"
+  else
+    for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
+      if [ -e "$f" ]; then
+        name="$(basename "$f")"
+        systemctl stop "$name"
+        rm -f "/shares/$name"
+      fi
+    done
+  fi
+
+elif [ "$1" = "remove" ]; then
+  if [ $# -lt 2 ]; then
+    usage
+  fi
+  name="$2"
+  systemctl stop "shares-$name.mount" || true
+  rm -f "/mnt/overlay/etc/systemd/system.control/shares-$name.mount"
+  systemctl daemon-reload
+  rm -f "/shares/$name"
+
+else
+  usage
+
+fi

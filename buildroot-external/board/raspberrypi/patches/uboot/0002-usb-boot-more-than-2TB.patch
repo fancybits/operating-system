@@ -1,0 +1,13 @@
+diff --git a/include/configs/rpi.h b/include/configs/rpi.h
+index 834f1cd..9396ad2 100644
+--- a/include/configs/rpi.h
++++ b/include/configs/rpi.h
+@@ -59,6 +59,8 @@
+
+ #ifdef CONFIG_ARM64
+ #define CONFIG_SYS_BOOTM_LEN		SZ_64M
++#define CONFIG_SYS_64BIT_LBA
++#define CONFIG_LBA48
+ #endif
+
+ /* Devices */

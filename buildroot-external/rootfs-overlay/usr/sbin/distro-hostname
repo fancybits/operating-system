@@ -1,0 +1,16 @@
+#/bin/sh
+set -e
+
+if [ $# -gt 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+  echo "Usage: $0 [<newhostname>]"
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  hostname  
+else
+  hostnamectl set-hostname "$1"
+  if systemctl is-active smb >/dev/null; then
+    systemctl restart smb nmb wsdd2
+  fi
+fi

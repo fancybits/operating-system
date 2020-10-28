@@ -1,0 +1,23 @@
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index 60b1c1d761..53a230c537 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -128,6 +128,9 @@ static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
+ 		return -1;
+ 	}
+ 
++	// XXX lastlba may be zero for drives larger than 2.2TiB because usb_read_capacity does not try to use SCSI_RD_CAPAC16
++	// See https://www.dropbox.com/s/5ezx8dljw2kunm1/uboot.2017.07-bigdisk.tar.gz?dl=0&file_subpath=%2Fpogoplug-big-TB-disk.patch
++	if (lastlba > 0) {
+ 	/*
+ 	 * Check that the first_usable_lba and that the last_usable_lba are
+ 	 * within the disk.
+@@ -142,6 +145,7 @@ static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
+ 		       le64_to_cpu(gpt_h->last_usable_lba), lastlba);
+ 		return -1;
+ 	}
++	}
+ 
+ 	debug("GPT: first_usable_lba: %llX last_usable_lba: %llX last lba: "
+ 	      LBAF "\n", le64_to_cpu(gpt_h->first_usable_lba),
+

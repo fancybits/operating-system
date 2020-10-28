@@ -4,19 +4,19 @@
 #
 ################################################################################
 
-CHANNELS_DVR_VERSION = 2020.10.09.2154
+CHANNELS_DVR_VERSION = 2020.10.26.2201
 CHANNELS_DVR_SITE = $(BR2_EXTERNAL_HASSOS_PATH)/package/channels-dvr
 CHANNELS_DVR_SITE_METHOD = local
 
 define CHANNELS_DVR_USERS
-	channels 501 channels 501 * /mnt/data/channels-dvr/data - video Channels
+	channels 501 channels 501 * /mnt/data/channels-dvr/data - video,systemd-journal Channels
 endef
 
 define CHANNELS_DVR_INSTALL_TARGET_CMDS
 	sudo umount /mnt/data || true
 	dd if=/dev/zero of=$(BINARIES_DIR)/data.ext4 bs=1M count=8k
 	mkfs.ext4 -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 $(BINARIES_DIR)/data.ext4
-	mkdir -p /mnt/data/
+	sudo mkdir -p /mnt/data/
 	sudo mount -o loop $(BINARIES_DIR)/data.ext4 /mnt/data
 
 	sudo mkdir -p /mnt/data/channels-dvr/{data,$(CHANNELS_DVR_VERSION)}

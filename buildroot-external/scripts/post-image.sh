@@ -23,9 +23,14 @@ mkdir -p "$(path_boot_dir)"
 # Hook pre image build stuff
 hassos_pre_image
 
-# Disk & OTA
-create_disk_image
+# OTA
+prepare_disk_image
 create_ota_update
 
-# Hook post image build stuff
+if [ -n "$OTA_ONLY" ]; then
+  exit 0
+fi
+
+# Disk
+create_disk_image
 hassos_post_image

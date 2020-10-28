@@ -1,0 +1,13 @@
+[Unit]
+Description=Systemd local persistent configuration
+Requires=mnt-overlay.mount
+After=mnt-overlay.mount hassos-overlay.service
+
+[Mount]
+What=/mnt/overlay/etc/systemd/system.control
+Where=/etc/systemd/system.control
+Type=none
+Options=bind
+
+[Install]
+WantedBy=hassos-bind.target

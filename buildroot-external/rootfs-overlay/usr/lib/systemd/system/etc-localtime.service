@@ -1,0 +1,14 @@
+[Unit]
+Description=Localtime persistent configuration
+Requires=mnt-overlay.mount
+After=mnt-overlay.mount hassos-overlay.service
+Before=network.target
+
+[Service]
+Type=oneshot
+ExecStart=mount -o bind /mnt/overlay/etc/localtime /etc/localtime
+ExecStop=-umount /etc/localtime
+RemainAfterExit=true
+
+[Install]
+WantedBy=local-fs.target

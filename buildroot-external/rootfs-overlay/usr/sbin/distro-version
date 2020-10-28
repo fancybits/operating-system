@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "--inactive" ]; then
+  device=$(rauc status --output-format shell | grep -A3 inactive | grep -A1 rootfs | grep ^RAUC_SLOT_DEVICE | cut -d= -f2 | cut -d "'" -f2)
+  mkdir -p /run/rauc-inactive
+  umount /run/rauc-inactive >/dev/null 2>&1 || true
+  mount -o ro $device /run/rauc-inactive
+  grep VERSION_ID= /run/rauc-inactive/etc/os-release | cut -d= -f2
+  umount /run/rauc-inactive
+  exit 0
+fi
+
+grep VERSION_ID= /etc/os-release | cut -d= -f2
