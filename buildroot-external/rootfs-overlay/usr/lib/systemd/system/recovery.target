@@ -1,0 +1,6 @@
+[Unit]
+Description=Recovery Mode
+Documentation=man:systemd.target(5)
+Requires=sysinit.target recovery.service
+After=sysinit.target recovery.service
+AllowIsolate=yes
