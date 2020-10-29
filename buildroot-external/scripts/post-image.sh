@@ -35,7 +35,7 @@ fi
 prepare_disk_image
 create_ota_update
 
-if [ -n "$OTA_ONLY" ]; then
+if [ -n "$DISTRO_OTA_ONLY" ]; then
   exit 0
 fi
 
