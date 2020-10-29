@@ -1,6 +1,7 @@
 [Unit]
 Description=Recovery Mode
 Documentation=man:systemd.target(5)
-Requires=sysinit.target network.target hassos-bind.target recovery.service
-After=sysinit.target network.target hassos-bind.target recovery.service
+Requires=sysinit.target hassos-bind.target recovery.service
+Wants=NetworkManager.service network.target
+After=sysinit.target network.target hassos-bind.target NetworkManager.service recovery.service
 AllowIsolate=yes
