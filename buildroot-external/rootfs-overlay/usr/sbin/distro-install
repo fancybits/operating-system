@@ -110,7 +110,9 @@ EOF
 fi
 
 if [ "$1" = "overwrite" ]; then
-	mkfs.ext4 -F -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 "${hdd_img}8"
+  mkfs.ext4 -F -L "hassos-overlay" -E lazy_itable_init=0,lazy_journal_init=0 "${hdd_img}7"
+
+  mkfs.ext4 -F -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 "${hdd_img}8"
   mkdir -p data
   mount "${hdd_img}8" data
   cd data
