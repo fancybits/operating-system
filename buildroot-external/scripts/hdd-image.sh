@@ -16,7 +16,11 @@ BOOTSTATE_SIZE=8M
 SYSTEM_SIZE=256M
 KERNEL_SIZE=24M
 OVERLAY_SIZE=96M
+if [ -z "$DISTRO_RECOVERY_IMAGE" ]; then
 DATA_SIZE=8G
+else
+DATA_SIZE=512MB
+fi
 DVR_SIZE=512MB
 
 
@@ -122,6 +126,9 @@ function _create_disk_gpt() {
     local kernel_img="$(path_kernel_img)"
     local hdd_img="$(hassos_image_name img)"
     local hdd_count=${DISK_SIZE:-2}
+    if [ -n "$DISTRO_RECOVERY_IMAGE" ]; then
+        hdd_count=2
+    fi
 
     local boot_offset=0
     local rootfs_offset=0
