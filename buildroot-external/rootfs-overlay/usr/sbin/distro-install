@@ -123,3 +123,7 @@ if [ "$1" = "overwrite" ]; then
 
   mkfs.exfat -n DVR "${hdd_img}9"
 fi
+
+echo
+echo "Finished $1 on $hdd_img!"
+echo "You may now remove the drive."
