@@ -23,6 +23,14 @@ mkdir -p "$(path_boot_dir)"
 # Hook pre image build stuff
 hassos_pre_image
 
+# Recovery
+if [ -n "$DISTRO_RECOVERY_IMAGE" ]; then
+  prepare_disk_image
+  create_disk_image
+  hassos_post_image
+  exit 0
+fi
+
 # OTA
 prepare_disk_image
 create_ota_update

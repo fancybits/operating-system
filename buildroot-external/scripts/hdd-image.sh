@@ -171,9 +171,11 @@ function _create_disk_gpt() {
     data_offset="$(sgdisk -F "${hdd_img}")"
     sgdisk -n "0:0:+${DATA_SIZE}" -c 0:"hassos-data" -t 0:"0FC63DAF-8483-4772-8E79-3D69D8477DE4" -u "0:${DATA_UUID}" "${hdd_img}"
 
+    if [ -z "$DISTRO_RECOVERY_IMAGE" ]; then
     # DVR
     dvr_offset="$(sgdisk -F "${hdd_img}")"
     sgdisk -n "0:0:+${DVR_SIZE}" -c 0:"DVR" -t 0:"EBD0A0A2-B9E5-4433-87C0-68B6B72699C7" -u "0:${DVR_UUID}" "${hdd_img}"
+    fi
 
     ##
     # Write Images
@@ -182,7 +184,9 @@ function _create_disk_gpt() {
     dd if="${kernel_img}" of="${hdd_img}" conv=notrunc bs=512 seek="${kernel_offset}"
     dd if="${rootfs_img}" of="${hdd_img}" conv=notrunc bs=512 seek="${rootfs_offset}"
     dd if="${overlay_img}" of="${hdd_img}" conv=notrunc bs=512 seek="${overlay_offset}"
+    if [ -z "$DISTRO_RECOVERY_IMAGE" ]; then
     dd if="${data_img}" of="${hdd_img}" conv=notrunc bs=512 seek="${data_offset}"
+    fi
 
     # Set Hyprid partition
     if [ "${BOOT_SYS}" == "hyprid" ]; then

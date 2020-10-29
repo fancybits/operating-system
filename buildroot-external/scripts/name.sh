@@ -1,7 +1,11 @@
 #!/bin/bash
 
 function hassos_image_name() {
-    echo "${BINARIES_DIR}/${HASSOS_ID}_${BOARD_ID}.${1}"
+    if [ -n "$DISTRO_RECOVERY_IMAGE" ]; then
+        echo "${BINARIES_DIR}/${HASSOS_ID}_${BOARD_ID}_RECOVERY.${1}"
+    else
+        echo "${BINARIES_DIR}/${HASSOS_ID}_${BOARD_ID}.${1}"
+    fi
 }
 
 function hassos_rauc_compatible() {
