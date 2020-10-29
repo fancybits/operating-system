@@ -9,6 +9,7 @@ Before=shutdown.target
 Environment=HOME=/root
 WorkingDirectory=-/root
 ExecStart=/bin/sh
+ExecStartPost=-/usr/bin/rauc status mark-good
 Type=idle
 StandardInput=tty-force
 StandardOutput=inherit
