@@ -5,6 +5,7 @@ RefuseManualStart=true
 RefuseManualStop=true
 Requires=mnt-data.mount
 After=mnt-data.mount
+ConditionKernelCommandLine=!systemd.unit=recovery.target
 
 [Service]
 Type=oneshot
