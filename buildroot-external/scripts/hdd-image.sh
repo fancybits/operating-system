@@ -128,7 +128,7 @@ function _create_disk_gpt() {
     local hdd_count=${DISK_SIZE:-2}
     if [ -n "$DISTRO_RECOVERY_IMAGE" ]; then
         hdd_count=2
-        dd if=/dev/zero of=$BINARIES_DIR/emptydata.ext4 bs=1M count=8k
+        dd if=/dev/zero of=$BINARIES_DIR/emptydata.ext4 bs=512 count=$(size2sectors "$DATA_SIZE")
         mkfs.ext4 -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 $BINARIES_DIR/emptydata.ext4
         data_img="$BINARIES_DIR/emptydata.ext4"
     fi
