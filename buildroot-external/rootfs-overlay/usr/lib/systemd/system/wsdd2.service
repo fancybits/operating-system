@@ -1,0 +1,17 @@
+[Unit]
+Description=WSD/LLMNR Discovery/Name Service Daemon
+
+[Service]
+ExecStart=/usr/sbin/wsdd2
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+DynamicUser=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+AmbientCapabilities=CAP_NET_RAW
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
