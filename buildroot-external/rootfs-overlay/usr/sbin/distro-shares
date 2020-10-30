@@ -16,8 +16,8 @@ if [ "$1" = "add" ]; then
   cat > "/mnt/overlay/etc/systemd/system.control/shares-$name.mount" <<EOF
 [Unit]
 Description=$name Share
-Requires=shares.mount network.target
-After=shares.mount network.target
+Requires=shares.mount network.target network-online.target
+After=shares.mount network.target network-online.target
 
 [Mount]
 What=$path
