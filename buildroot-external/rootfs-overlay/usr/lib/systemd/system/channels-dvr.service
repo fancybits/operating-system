@@ -7,6 +7,7 @@ After=network-online.target time-sync.target media.mount mnt-data.mount
 Type=simple
 User=channels
 Group=channels
+AmbientCapabilities=CAP_NET_BIND_SERVICE
 WorkingDirectory=/mnt/data/channels-dvr/data
 Environment=CHANNELS_DVR_DEFAULT_PATH=/media/DVR
 ExecStart=/mnt/data/channels-dvr/latest/channels-dvr -dir /mnt/data/channels-dvr/data/
