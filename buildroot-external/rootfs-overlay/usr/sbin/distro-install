@@ -109,7 +109,12 @@ EOF
   rauc -c rauc.conf write-slot rootfs.0 /run/installer/rootfs.img
 fi
 
-if [ "$1" = "overwrite" ]; then
+if [ "$1" = "repair" ]; then
+  fsck.vfat -y "${hdd_img}1"
+  fsck.ext4 -y "${hdd_img}7"
+  fsck.ext4 -y "${hdd_img}8"
+  fsck.exfat -y "${hdd_img}9"
+elif [ "$1" = "overwrite" ]; then
   mkfs.ext4 -F -L "hassos-overlay" -E lazy_itable_init=0,lazy_journal_init=0 "${hdd_img}7"
 
   mkfs.ext4 -F -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 "${hdd_img}8"
