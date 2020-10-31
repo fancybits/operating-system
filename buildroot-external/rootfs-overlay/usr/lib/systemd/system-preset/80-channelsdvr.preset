@@ -1,3 +1,5 @@
+disable wsdd2.service
+disable avahi-daemon.service
 disable avahi-dnsconfd.service
 disable docker.service
 disable etc-docker.mount
