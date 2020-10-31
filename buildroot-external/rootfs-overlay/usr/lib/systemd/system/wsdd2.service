@@ -2,7 +2,7 @@
 Description=WSD/LLMNR Discovery/Name Service Daemon
 
 [Service]
-ExecStart=/usr/sbin/wsdd2
+ExecStart=/usr/sbin/wsdd2 -w -b "vendor:Channels,model:DVR server,vendorurl:https://getchannels.com,modelurl:https://getchannels.com/dvr-server,presentationurl:/"
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 DynamicUser=true
