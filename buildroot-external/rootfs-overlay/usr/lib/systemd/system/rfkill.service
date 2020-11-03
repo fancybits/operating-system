@@ -1,0 +1,11 @@
+[Unit]
+Description=Wifi Radio Disable
+Requires=NetworkManager.service network-online.target
+After=NetworkManager.service network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'if [ "$(nmcli -t c | grep :802-11-wireless: | wc -l)" = "0" ]; then nmcli radio wifi off; fi'
+
+[Install]
+WantedBy=multi-user.target
