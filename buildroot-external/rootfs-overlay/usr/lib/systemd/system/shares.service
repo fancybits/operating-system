@@ -1,7 +1,7 @@
 [Unit]
 Description=Mount Shares
 Requires=shares.mount network-online.target
-After=shares.mount network-online.target
+After=shares.mount network-online.target winbindd.service
 
 [Service]
 Type=oneshot

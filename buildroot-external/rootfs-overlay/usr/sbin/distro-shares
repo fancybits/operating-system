@@ -17,7 +17,7 @@ if [ "$1" = "add" ]; then
 [Unit]
 Description=$name Share
 Requires=shares.mount network.target network-online.target
-After=shares.mount network.target network-online.target
+After=shares.mount network.target network-online.target winbindd.target
 
 [Mount]
 What=$path
