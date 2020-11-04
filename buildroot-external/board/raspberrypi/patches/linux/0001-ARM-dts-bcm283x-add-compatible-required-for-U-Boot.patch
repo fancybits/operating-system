@@ -1,0 +1,31 @@
+From b99290e325cdb4d59676187b2eb192591af548a1 Mon Sep 17 00:00:00 2001
+Message-Id: <b99290e325cdb4d59676187b2eb192591af548a1.1604501368.git.stefan@agner.ch>
+From: Pascal Vizeli <pvizeli@syshack.ch>
+Date: Tue, 2 Jun 2020 21:20:08 +0000
+Subject: [PATCH] ARM: dts: bcm283x: add compatible required for U-Boot
+
+Without brcm,bcm2835-pl011 in compatible U-Boot uses the regular PL011
+driver which seems to crash when enable_uart=1 is not used.
+
+Signed-off-by: Pascal Vizeli <pvizeli@syshack.ch>
+Signed-off-by: Stefan Agner <stefan@agner.ch>
+---
+ arch/arm/boot/dts/bcm283x.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/bcm283x.dtsi b/arch/arm/boot/dts/bcm283x.dtsi
+index 4426f9e6ba92..abcf677fe416 100644
+--- a/arch/arm/boot/dts/bcm283x.dtsi
++++ b/arch/arm/boot/dts/bcm283x.dtsi
+@@ -306,7 +306,7 @@
+ 		};
+ 
+ 		uart0: serial@7e201000 {
+-			compatible = "arm,pl011", "arm,primecell";
++			compatible = "brcm,bcm2835-pl011", "arm,pl011", "arm,primecell";
+ 			reg = <0x7e201000 0x200>;
+ 			interrupts = <2 25>;
+ 			clocks = <&clocks BCM2835_CLOCK_UART>,
+-- 
+2.29.1
+
