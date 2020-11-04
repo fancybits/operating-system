@@ -5,6 +5,8 @@ RefuseManualStart=true
 RefuseManualStop=true
 Requires=mnt-data.mount
 After=mnt-data.mount
+After=systemd-fsck@dev-disk-by\x2dlabel-hassos\x2ddata.service
+ConditionKernelCommandLine=!systemd.unit=recovery.target
 
 [Service]
 Type=oneshot

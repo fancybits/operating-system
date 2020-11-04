@@ -1,0 +1,31 @@
+From 9e954b14b2b5f9889634c64b9724662bd04c14a8 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Wed, 6 Nov 2019 13:58:08 +0000
+Subject: [PATCH] staging: bcm2835-codec: Fix potential memory leak of isp
+ instance
+
+"d867785 staging: bcm2835-codec: add media controller support" added
+a new error path that jumped to end, but didn't add the free
+of the ISP device should that path be taken.
+Fix this.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ .../staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c  | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+index f5adaac765cdf..50395795c3dba 100644
+--- a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
++++ b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+@@ -2841,6 +2841,10 @@ static int bcm2835_codec_probe(struct platform_device *pdev)
+ 	return 0;
+ 
+ out:
++	if (drv->isp) {
++		bcm2835_codec_destroy(drv->isp);
++		drv->isp = NULL;
++	}
+ 	if (drv->encode) {
+ 		bcm2835_codec_destroy(drv->encode);
+ 		drv->encode = NULL;

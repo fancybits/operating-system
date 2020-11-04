@@ -1,0 +1,12 @@
+[Unit]
+Description=Dropbear Recovery SSH daemon
+After=syslog.target network.target auditd.service
+RequiresMountsFor=/etc/dropbear
+ConditionKernelCommandLine=systemd.unit=recovery.target
+
+[Service]
+ExecStart=/usr/sbin/dropbear -F -R -E -p 22 -B
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=recovery.target

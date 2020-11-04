@@ -16,7 +16,11 @@ BOOTSTATE_SIZE=8M
 SYSTEM_SIZE=256M
 KERNEL_SIZE=24M
 OVERLAY_SIZE=96M
+if [ -z "$DISTRO_RECOVERY_IMAGE" ]; then
 DATA_SIZE=8G
+else
+DATA_SIZE=512MB
+fi
 DVR_SIZE=512MB
 
 
@@ -122,6 +126,12 @@ function _create_disk_gpt() {
     local kernel_img="$(path_kernel_img)"
     local hdd_img="$(hassos_image_name img)"
     local hdd_count=${DISK_SIZE:-2}
+    if [ -n "$DISTRO_RECOVERY_IMAGE" ]; then
+        hdd_count=2
+        dd if=/dev/zero of=$BINARIES_DIR/emptydata.ext4 bs=512 count=$(size2sectors "$DATA_SIZE")
+        mkfs.ext4 -L "hassos-data" -E lazy_itable_init=0,lazy_journal_init=0 $BINARIES_DIR/emptydata.ext4
+        data_img="$BINARIES_DIR/emptydata.ext4"
+    fi
 
     local boot_offset=0
     local rootfs_offset=0
@@ -171,9 +181,11 @@ function _create_disk_gpt() {
     data_offset="$(sgdisk -F "${hdd_img}")"
     sgdisk -n "0:0:+${DATA_SIZE}" -c 0:"hassos-data" -t 0:"0FC63DAF-8483-4772-8E79-3D69D8477DE4" -u "0:${DATA_UUID}" "${hdd_img}"
 
+    if [ -z "$DISTRO_RECOVERY_IMAGE" ]; then
     # DVR
     dvr_offset="$(sgdisk -F "${hdd_img}")"
     sgdisk -n "0:0:+${DVR_SIZE}" -c 0:"DVR" -t 0:"EBD0A0A2-B9E5-4433-87C0-68B6B72699C7" -u "0:${DVR_UUID}" "${hdd_img}"
+    fi
 
     ##
     # Write Images

@@ -1,2 +1,2 @@
-KERNEL=="sd[a-z]*[0-9]", SUBSYSTEMS=="usb", ACTION=="add", RUN+="/bin/systemctl --no-block start usb-mount@%k.service"
-KERNEL=="sd[a-z]*[0-9]", SUBSYSTEMS=="usb", ACTION=="remove", RUN+="/bin/systemctl --no-block stop usb-mount@%k.service"
+KERNEL=="sd[a-z]*[0-9]", SUBSYSTEMS=="usb", ACTION=="add", ENV{ID_PART_ENTRY_NAME}!="hassos-?*", RUN+="/bin/systemctl --no-block start usb-mount@%k.service"
+KERNEL=="sd[a-z]*[0-9]", SUBSYSTEMS=="usb", ACTION=="remove", ENV{ID_PART_ENTRY_NAME}!="hassos-?*", RUN+="/bin/systemctl --no-block stop usb-mount@%k.service"

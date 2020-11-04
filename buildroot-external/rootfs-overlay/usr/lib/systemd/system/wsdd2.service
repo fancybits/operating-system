@@ -1,0 +1,18 @@
+[Unit]
+Description=WSD/LLMNR Discovery/Name Service Daemon
+BindsTo=smb.service
+
+[Service]
+ExecStart=/usr/sbin/wsdd2 -w -b "vendor:Channels,model:DVR server,vendorurl:getchannels.com,modelurl:getchannels.com/dvr-server"
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+DynamicUser=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+AmbientCapabilities=CAP_NET_RAW
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

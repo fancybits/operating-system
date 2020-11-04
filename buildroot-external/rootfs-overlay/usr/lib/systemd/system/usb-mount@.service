@@ -2,6 +2,7 @@
 Description=Mount USB Drive on %i
 Requires=media.mount mnt-overlay.mount hassos-expand.service
 After=media.mount mnt-overlay.mount hassos-expand.service
+ConditionKernelCommandLine=!systemd.unit=recovery.target
 
 [Service]
 Type=oneshot
