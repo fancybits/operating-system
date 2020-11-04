@@ -1,3 +1,4 @@
+Defaults:channels !syslog, !pam_session
 channels ALL=(ALL) NOPASSWD: /bin/systemctl reboot, /bin/systemctl poweroff
 channels ALL=(ALL) NOPASSWD: /bin/nmcli
 channels ALL=(ALL) NOPASSWD: /bin/systemctl stop usb-mount@[[\:alpha\:][\:digit\:]]*
