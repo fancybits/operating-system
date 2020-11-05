@@ -2,7 +2,7 @@
 set -e
 
 usage() {
-  echo "Usage: $0 <add|remove|list|start|stop> <sharename> [<options> <path>]"
+  echo "Usage: $0 <add|remove|list|start|stop|status> <sharename> [<options> <path>]"
   exit 1
 }
 
@@ -16,19 +16,25 @@ if [ "$1" = "add" ]; then
   cat > "/mnt/overlay/etc/systemd/system.control/shares-$name.mount" <<EOF
 [Unit]
 Description=$name Share
-Requires=shares.mount network.target network-online.target
-After=shares.mount network.target network-online.target winbindd.target
 
 [Mount]
 What=$path
 Where=/shares/$name
 Type=cifs
 Options=$opts
+EOF
+  cat > "/mnt/overlay/etc/systemd/system.control/shares-$name.automount" <<EOF
+[Unit]
+Description=$name Share Automount
+
+[Automount]
+Where=/shares/$name
 
 [Install]
-WantedBy=remote-fs.target
+WantedBy=multi-user.target
 EOF
   systemctl daemon-reload
+  systemctl start "shares-$name.automount"
   systemctl start "shares-$name.mount"
 
 elif [ "$1" = "list" ]; then
@@ -42,13 +48,18 @@ elif [ "$1" = "list" ]; then
     fi
   done
 
+elif [ "$1" = "status" ]; then
+  name="$2"
+  systemctl status "shares-$name.mount"
+
 elif [ "$1" = "start" ]; then
   systemctl daemon-reload
   if [ $# -eq 2 ]; then
     name="$2"
     systemctl start "shares-$name.mount"
+    systemctl start "shares-$name.automount"
   else
-    for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
+    for f in /mnt/overlay/etc/systemd/system.control/shares-*.*mount; do
       if [ -e "$f" ]; then
         name="$(basename "$f")"
         systemctl start "$name" || true
@@ -59,10 +70,11 @@ elif [ "$1" = "start" ]; then
 elif [ "$1" = "stop" ]; then
   if [ $# -eq 2 ]; then
     name="$2"
-    systemctl stop "shares-$name.mount"
+    systemctl stop "shares-$name.automount" || true
+    systemctl stop "shares-$name.mount" || true
     rm -f "/shares/$name"
   else
-    for f in /mnt/overlay/etc/systemd/system.control/shares-*.mount; do
+    for f in /mnt/overlay/etc/systemd/system.control/shares-*.*mount; do
       if [ -e "$f" ]; then
         name="$(basename "$f")"
         systemctl stop "$name"
@@ -76,8 +88,10 @@ elif [ "$1" = "remove" ]; then
     usage
   fi
   name="$2"
+  systemctl stop "shares-$name.automount" || true
   systemctl stop "shares-$name.mount" || true
   rm -f "/mnt/overlay/etc/systemd/system.control/shares-$name.mount"
+  rm -f "/mnt/overlay/etc/systemd/system.control/shares-$name.automount"
   systemctl daemon-reload
   rm -f "/shares/$name"
 
