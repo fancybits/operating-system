@@ -2,8 +2,17 @@
 set -e
 
 if [ $# -eq 0 ]; then
-  echo "Usage: $0 <version>"
+  echo "Usage: $0 [--dvr] <version>"
   exit 1
+fi
+
+if [ "$1" = "--dvr" ]; then
+  cd /mnt/data
+  curl -s https://getchannels.com/dvr/setup.sh | sudo -u channels env DOWNLOAD_ONLY=1 DVR_VERSION="$2" sh
+
+  echo
+  echo 'Please restart the DVR server using `systemctl restart channels-dvr`'
+  exit 0
 fi
 
 version=$1
