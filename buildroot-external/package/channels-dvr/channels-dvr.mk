@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-CHANNELS_DVR_VERSION = 2020.11.04.2258
+CHANNELS_DVR_VERSION = 2020.11.06.2051
 CHANNELS_DVR_SITE = $(BR2_EXTERNAL_HASSOS_PATH)/package/channels-dvr
 CHANNELS_DVR_SITE_METHOD = local
 
