@@ -69,6 +69,8 @@ do_mount()
     # File system type specific mount options
     if [ "${ID_FS_TYPE}" = "vfat" ]; then
         OPTS="${OPTS},uid=501,gid=501,umask=000,utf8=1"
+    elif [ "${ID_FS_TYPE}" = "ntfs" ]; then
+        OPTS="${OPTS},uid=501,gid=501,umask=000"
     elif [ "${ID_FS_TYPE}" = "exfat" ]; then
         OPTS="${OPTS},uid=501,gid=501,umask=000"
     fi
