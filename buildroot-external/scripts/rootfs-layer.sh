@@ -14,7 +14,7 @@ function fix_rootfs() {
     rm -rf "${TARGET_DIR:?}/opt"
 
     # Cleanup miscs
-    rm -rf "${TARGET_DIR}/usr/lib/modules-load.d"
+    # rm -rf "${TARGET_DIR}/usr/lib/modules-load.d"
 
     # Fix: permission for system connection files
     chmod 600 "${TARGET_DIR}/etc/NetworkManager/system-connections"/*

@@ -48,7 +48,7 @@ do_mount()
 
     if grep -q " /media/${LABEL} " /etc/mtab; then
         # Already in use, make a unique one
-        LABEL+="-${DEVBASE}"
+        LABEL="${LABEL}-${DEVBASE}"
     fi
     DEV_LABEL="${LABEL}"
 
@@ -67,9 +67,11 @@ do_mount()
     OPTS="rw,relatime"
 
     # File system type specific mount options
-    # if [ "${ID_FS_TYPE}" = "vfat" ]; then
-    #     OPTS+=",users,gid=100,umask=000,shortname=mixed,utf8=1,flush"
-    # fi
+    if [ "${ID_FS_TYPE}" = "vfat" ]; then
+        OPTS="${OPTS},uid=501,gid=501,umask=000,utf8=1"
+    elif [ "${ID_FS_TYPE}" = "exfat" ]; then
+        OPTS="${OPTS},uid=501,gid=501,umask=000"
+    fi
 
     if ! mount -o ${OPTS} ${DEVICE} ${MOUNT_POINT}; then
         ${log} "Error mounting ${DEVICE} (status = $?)"
