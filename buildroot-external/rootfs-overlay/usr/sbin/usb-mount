@@ -40,6 +40,10 @@ do_mount()
         ${log} "Skipping system partition on ${DEVICE}"
         exit 0
     fi
+    if echo "$LABEL" | grep -q "^Boot_OS_X"; then
+        ${log} "Skipping system partition on ${DEVICE}"
+        exit 0
+    fi
     if echo "$LABEL" | grep -q "^CONFIG$"; then
         ${log} "Skipping CONFIG partition on ${DEVICE}"
         systemctl start hassos-config.service
@@ -72,6 +76,8 @@ do_mount()
     elif [ "${ID_FS_TYPE}" = "ntfs" ]; then
         OPTS="${OPTS},uid=501,gid=501,umask=000"
     elif [ "${ID_FS_TYPE}" = "exfat" ]; then
+        OPTS="${OPTS},uid=501,gid=501,umask=000"
+    elif [ "${ID_FS_TYPE}" = "hfsplus" ]; then
         OPTS="${OPTS},uid=501,gid=501,umask=000"
     fi
 
